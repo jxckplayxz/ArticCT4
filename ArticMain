@@ -3,9 +3,11 @@ local library = {
     SectionsOpened = false,
     Theme = "CUI"
 }
-library.flags = library.Flags
-library.theme = library.Theme
+library.flags = library.Flags 
+library.theme = library.Theme 
 
+local NotificationAOT = require(path_to_your_module_script) 
+NotificationAOT.ShowNotification("ArtiCT:for updates join our discord:https://discord.gg/wTRXCSSsnr!")
 local Themes = {
     ["CUI"] = {
         Topbar = Color3.fromRGB(30, 30, 35),
