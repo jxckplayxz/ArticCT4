@@ -1,13 +1,13 @@
 local library = {
     Flags = {},
     SectionsOpened = false,
-    Theme = "CUI"
+    Theme = "Dark"
 }
 library.flags = library.Flags
 library.theme = library.Theme
 
 local Themes = {
-    ["CUI"] = {
+    ["Dark"] = {
         Topbar = Color3.fromRGB(30, 30, 35),
         TabContainer = Color3.fromRGB(25, 25, 30),
         Lines = Color3.fromRGB(50, 50, 55),
@@ -40,6 +40,74 @@ local Themes = {
         ContainerHolder = Color3.fromRGB(26, 26, 31),
         HighlightUIStroke = Color3.fromRGB(79, 79, 86),
         Highlight = Color3.fromRGB(80, 201, 206)
+    },
+    ["Tokyo Night"] = {
+        Topbar = Color3.fromRGB(39, 40, 57),
+        TabContainer = Color3.fromRGB(31, 32, 45),
+        Lines = Color3.fromRGB(62, 63, 90),
+        HoverTabFrame = Color3.fromRGB(52, 53, 76),
+        ItemUIStroke = Color3.fromRGB(51, 53, 75),
+        TabFrame = Color3.fromRGB(39, 40, 57),
+        SectionFrame = Color3.fromRGB(31, 32, 45),
+        TabText = Color3.fromRGB(237, 237, 237),
+        ItemText = Color3.fromRGB(237, 237, 237),
+        SectionText = Color3.fromRGB(237, 237, 237),
+        ItemUIStrokeSelected = Color3.fromRGB(255, 183, 38),
+        SelectedTabFrame = Color3.fromRGB(70, 72, 102),
+        ItemFrame = Color3.fromRGB(39, 40, 57),
+        HoverItemFrame = Color3.fromRGB(50, 52, 74),
+        DropdownIcon = Color3.fromRGB(175, 175, 175),
+        SectionUIStroke = Color3.fromRGB(45, 46, 66),
+        MainUIStroke = Color3.fromRGB(64, 67, 100),
+        Main = Color3.fromRGB(26, 27, 38),
+        Shadow = Color3.fromRGB(26, 27, 38),
+        SliderOuter = Color3.fromRGB(56, 59, 83),
+        SliderInner = Color3.fromRGB(255, 183, 38),
+        TabUIStroke = Color3.fromRGB(55, 56, 80),
+        InputPlaceHolder = Color3.fromRGB(70, 73, 94),
+        ToggleOuter = Color3.fromRGB(56, 59, 83),
+        ToggleOuterEnabled = Color3.fromRGB(77, 82, 115),
+        ToggleOuterUIStroke = Color3.fromRGB(76, 79, 112),
+        ToggleOuterUIStrokeEnabled = Color3.fromRGB(255, 183, 38),
+        ToggleInner = Color3.fromRGB(76, 79, 112),
+        ToggleInnerEnabled = Color3.fromRGB(255, 183, 38),
+        ContainerHolder = Color3.fromRGB(32, 32, 47),
+        HighlightUIStroke = Color3.fromRGB(86, 89, 127),
+        Highlight = Color3.fromRGB(253, 191, 67)
+    },
+    ["Starry Night"] = {
+        Topbar = Color3.fromRGB(21, 26, 33),
+        TabContainer = Color3.fromRGB(19, 23, 30),
+        Lines = Color3.fromRGB(44, 53, 67),
+        HoverTabFrame = Color3.fromRGB(41, 49, 65),
+        ItemUIStroke = Color3.fromRGB(42, 49, 65),
+        TabFrame = Color3.fromRGB(34, 41, 54),
+        SectionFrame = Color3.fromRGB(23, 27, 35),
+        TabText = Color3.fromRGB(237, 237, 237),
+        ItemText = Color3.fromRGB(237, 237, 237),
+        SectionText = Color3.fromRGB(237, 237, 237),
+        ItemUIStrokeSelected = Color3.fromRGB(255, 211, 105),
+        SelectedTabFrame = Color3.fromRGB(53, 64, 84),
+        ItemFrame = Color3.fromRGB(32, 37, 49),
+        HoverItemFrame = Color3.fromRGB(43, 50, 67),
+        DropdownIcon = Color3.fromRGB(175, 175, 175),
+        SectionUIStroke = Color3.fromRGB(35, 41, 54),
+        MainUIStroke = Color3.fromRGB(54, 65, 85),
+        Main = Color3.fromRGB(19, 22, 29),
+        InputPlaceHolder = Color3.fromRGB(57, 66, 89),
+        Shadow = Color3.fromRGB(19, 22, 29),
+        SliderOuter = Color3.fromRGB(48, 56, 75),
+        SliderInner = Color3.fromRGB(255, 211, 105),
+        TabUIStroke = Color3.fromRGB(45, 54, 71),
+        ToggleOuter = Color3.fromRGB(48, 56, 75),
+        ToggleOuterEnabled = Color3.fromRGB(58, 68, 91),
+        ToggleOuterUIStroke = Color3.fromRGB(42, 49, 65),
+        ToggleOuterUIStrokeEnabled = Color3.fromRGB(255, 211, 105),
+        ToggleInner = Color3.fromRGB(77, 90, 121),
+        ToggleInnerEnabled = Color3.fromRGB(255, 211, 105),
+        ContainerHolder = Color3.fromRGB(25, 32, 43),
+        HighlightUIStroke = Color3.fromRGB(79, 94, 124),
+        Highlight = Color3.fromRGB(255, 229, 121)
     }
 }
 
@@ -410,6 +478,46 @@ closeButton.MouseButton1Click:Connect(function()
     unnamed:Destroy()
     shadow:Destroy()
     notifications:Destroy()
+end)
+
+local minimizeButton = Instance.new("ImageButton")
+minimizeButton.Name = "ImageButton"
+minimizeButton.Image = "rbxassetid://10664064072"
+minimizeButton.ImageTransparency = 0.1
+minimizeButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+minimizeButton.BackgroundTransparency = 1
+minimizeButton.Position = UDim2.new(0.954, -18, 0.235, 0)
+minimizeButton.Size = UDim2.new(0, 17, 0, 17)
+minimizeButton.Parent = topbar
+
+minimizeButton.MouseEnter:Connect(function()
+    TweenService:Create(minimizeButton, TweenInfo.new(.125, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {ImageColor3 = Theme.Highlight}):Play()
+end)
+
+minimizeButton.MouseLeave:Connect(function()
+    TweenService:Create(minimizeButton, TweenInfo.new(.125, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {ImageColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+end)
+
+local Minimized = false
+
+minimizeButton.MouseButton1Click:Connect(function()
+    Minimized = not Minimized
+   
+    if Minimized then
+        topbar.TopbarLine.Visible = false
+        mainShadow.Visible = false
+    end
+    TweenService:Create(main, TweenInfo.new(.125, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {Size = Minimized and UDim2.new(0, 500,0, 34) or UDim2.new(0, 500,0, 350)}):Play()
+    if not Minimized then
+        wait(.125)
+        mainShadow.Visible = true
+        topbar.TopbarLine.Visible = true
+    end
+    for _,v in next, main:GetChildren() do
+        if v.Name ~= "Topbar" and v.ClassName == "Frame" or v.ClassName == "ScrollingFrame" then
+            v.Visible = not Minimized
+        end
+    end
 end)
 
 local uIStroke = Instance.new("UIStroke")
