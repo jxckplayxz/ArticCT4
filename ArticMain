@@ -58,16 +58,16 @@ local isfolder = isfolder or syn_isfolder or is_folder
 local makefolder = makefolder or make_folder or createfolder or create_folder
 
 if not isfolder("Unnamed") then
-makefolder("ArticCT")
+makefolder("Unnamed")
     
 local Shadow = request({Url = "https://raw.githubusercontent.com/Rain-Design/Unnamed/main/Icons/UnnamedShadow.png", Method = "GET"})
-writefile("Artic/Shadow.png", Shadow.Body)
+writefile("Unnamed/Shadow.png", Shadow.Body)
 
 local Chevron = request({Url = "https://raw.githubusercontent.com/Rain-Design/Unnamed/main/Icons/Chevron.png", Method = "GET"})
-writefile("Artic/Chevron.png", Chevron.Body)
+writefile("Unnamed/Chevron.png", Chevron.Body)
 
 local Circle = request({Url = "https://raw.githubusercontent.com/Rain-Design/Unnamed/main/Icons/Circle.png", Method = "GET"})
-writefile("Artic/Circle.png", Circle.Body)
+writefile("Unnamed/Circle.png", Circle.Body)
 end
 
 local SelectedTab = nil
