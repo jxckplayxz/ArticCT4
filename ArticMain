@@ -58,16 +58,16 @@ local isfolder = isfolder or syn_isfolder or is_folder
 local makefolder = makefolder or make_folder or createfolder or create_folder
 
 if not isfolder("Unnamed") then
-makefolder("Unnamed")
+makefolder("ArticCT")
     
 local Shadow = request({Url = "https://raw.githubusercontent.com/Rain-Design/Unnamed/main/Icons/UnnamedShadow.png", Method = "GET"})
-writefile("Unnamed/Shadow.png", Shadow.Body)
+writefile("Artic/Shadow.png", Shadow.Body)
 
 local Chevron = request({Url = "https://raw.githubusercontent.com/Rain-Design/Unnamed/main/Icons/Chevron.png", Method = "GET"})
-writefile("Unnamed/Chevron.png", Chevron.Body)
+writefile("Artic/Chevron.png", Chevron.Body)
 
 local Circle = request({Url = "https://raw.githubusercontent.com/Rain-Design/Unnamed/main/Icons/Circle.png", Method = "GET"})
-writefile("Unnamed/Circle.png", Circle.Body)
+writefile("Artic/Circle.png", Circle.Body)
 end
 
 local SelectedTab = nil
@@ -84,7 +84,72 @@ function library:GetXY(GuiObject)
 	local Px, Py = math.clamp(Mouse.X - GuiObject.AbsolutePosition.X, 0, Max), math.clamp(Mouse.Y - GuiObject.AbsolutePosition.Y, 0, May)
 	return Px/Max, Py/May
 end
+local NotificationUI = Instance.new("ScreenGui")
+local Notifications = {} -- Table to store notifications
 
+NotificationUI.Name = "NotificationUI"
+NotificationUI.Parent = game.CoreGui
+
+local function CreateNotification(message, index)
+    local NotificationFrame = Instance.new("Frame")
+    local NotificationLabel = Instance.new("TextLabel")
+    local NotificationCorner = Instance.new("UICorner")
+
+    NotificationFrame.Name = "NotificationFrame"
+    NotificationFrame.Parent = NotificationUI
+    NotificationFrame.BackgroundColor3 = Color3.new(25/255, 25/255, 25/255)
+    NotificationFrame.BackgroundTransparency = 0
+    NotificationFrame.Position = UDim2.new(1, 0, 0, 365 - (index * 60)) -- Position based on index
+    NotificationFrame.Size = UDim2.new(0, 200, 0, 50)
+
+    NotificationLabel.Name = "NotificationLabel"
+    NotificationLabel.Parent = NotificationFrame
+    NotificationLabel.BackgroundTransparency = 1
+    NotificationLabel.Position = UDim2.new(0, 10, 0, 15)
+    NotificationLabel.Size = UDim2.new(1, -20, 1, -20)
+    NotificationLabel.Text = message
+    NotificationLabel.TextColor3 = Color3.new(1, 1, 1)
+    NotificationLabel.TextScaled = true
+    NotificationLabel.TextWrapped = true
+    NotificationLabel.TextSize = 15
+
+    NotificationCorner.Parent = NotificationFrame
+    NotificationCorner.CornerRadius = UDim.new(0, 7)
+
+    table.insert(Notifications, NotificationFrame)
+    return NotificationFrame
+end
+
+local function ShowNotification(message)
+    local NotificationFrame = CreateNotification(message, #Notifications + 1)
+
+    -- Slide in animation
+    for i = 1, 200 do
+        NotificationFrame.Position = UDim2.new(1, -i, 0, 365 - (#Notifications * 60))
+        wait(0.001)
+    end
+
+    wait(0.0) -- Adjusted wait time for faster visibility
+
+    -- Slide out animation
+    for i = 200, 1, -1 do
+        NotificationFrame.Position = UDim2.new(1, -i, 0, 365 - (#Notifications * 60))
+        wait(0.001)
+    end
+
+    NotificationFrame:Destroy()
+    table.remove(Notifications, 1)
+
+    -- Move remaining notifications up
+    for index, frame in ipairs(Notifications) do
+        for i = 1, 60 do
+            frame.Position = UDim2.new(1, -200, 0, 365 - ((index - 1) * 60) - (60 - i))
+            wait(0.001)
+        end
+    end
+end
+
+return ShowNotification
 local notifications = Instance.new("ScreenGui")
 notifications.Name = HttpService:GenerateGUID(true)
 notifications.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
