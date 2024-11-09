@@ -6,7 +6,7 @@ local library = {
 library.flags = library.Flags 
 library.theme = library.Theme 
 
-local NotificationAOT = require(path_to_your_module_script) 
+local NotificationAOT = loadstring(game:HttpGet(('https://pastebin.com/raw/EF9dPy5Y')))() 
 NotificationAOT.ShowNotification("ArtiCT:for updates join our discord:https://discord.gg/wTRXCSSsnr!")
 local Themes = {
     ["CUI"] = {
